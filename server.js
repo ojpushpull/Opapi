@@ -23,3 +23,29 @@ let cards = [
 ]
 
 let nextId = 5;
+
+//Get /api/products
+app.get('/api/cards', (req,res) => {
+    res.json({
+        success: true,
+        data: cards
+    });
+});
+
+// Grab a card
+app.get('/api/cards/:id', (req,res) => {
+    const id = parseInt(req.params.id);
+    const card = cards.find(c => c.id === id);
+
+    if (!card) {
+        return res.status(404).json({
+            success: false,
+            message: 'Card unfound'
+        });
+    }
+
+    res.json({
+        success: true,
+        data: task
+    });
+});
